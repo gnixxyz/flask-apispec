@@ -92,7 +92,7 @@ class FlaskApiSpec(object):
     def swagger_ui(self):
         return flask.render_template('swagger-ui.html')
 
-    def register_existing_resources(self):
+    def register_existing_resources(self, blueprints=None):
         for name, rule in self.app.view_functions.items():
             try:
                 blueprint_name, _ = name.split('.')
@@ -100,6 +100,9 @@ class FlaskApiSpec(object):
                 blueprint_name = None
 
             try:
+                if blueprints is not None and blueprint_name not in blueprints:
+                    continue
+
                 self.register(rule, blueprint=blueprint_name)
             except TypeError:
                 pass
