@@ -51,7 +51,7 @@ class Converter(object):
             'operations': {
                 method.lower(): self.get_operation(rule, view, parent=parent)
                 for method, view in six.iteritems(operations)
-                if method.lower() in (set(valid_methods) - {'head'})
+                if method.lower() in (set(valid_methods) - {'head', 'options'})
             },
         }
 
